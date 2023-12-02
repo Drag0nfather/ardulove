@@ -7,13 +7,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired
 
-app = Flask(__name__)
-ckeditor = CKEditor(app)
+application = Flask(__name__)
+ckeditor = CKEditor(application)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['SECRET_KEY'] = 'your_secret_key'
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+application.config['SECRET_KEY'] = 'your_secret_key'
+db = SQLAlchemy(application)
+migrate = Migrate(application, db)
 
 
 class Instruction(db.Model):
@@ -47,32 +47,32 @@ class ProjectForm(FlaskForm):
 
 
 # Роуты для отображения страниц
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/instructions')
+@application.route('/instructions')
 def instructions():
     instructions = Instruction.query.all()
     return render_template('instructions.html', instructions=instructions)
 
-@app.route('/products')
+@application.route('/products')
 def products():
     products = Product.query.all()
     return render_template('products.html', products=products)
 
-@app.route('/projects')
+@application.route('/projects')
 def projects():
     projects = Project.query.all()
     return render_template('projects.html', projects=projects)
 
-@app.route('/project/<int:project_id>')
+@application.route('/project/<int:project_id>')
 def project_detail(project_id):
     project = Project.query.get_or_404(project_id)
     return render_template('project_detail.html', project=project)
 
 
-@app.route('/create_project', methods=['GET', 'POST'])
+@application.route('/create_project', methods=['GET', 'POST'])
 def create_project():
     form = ProjectForm()
 
@@ -93,4 +93,4 @@ def create_project():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
