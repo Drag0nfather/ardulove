@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Project</title>
+    <!-- Подключаем стили CKEditor -->
+    {{ ckeditor.load() }}
+</head>
+<body>
+
+<h1>Create Project</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.title.label }}
+        {{ form.title(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.description.label }}
+        {{ form.description(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.image.label }}
+        {{ form.image(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.article.label }}
+        {{ form.article(class="form-control") }}
+    </div>
+
+    <button type="submit">Create Project</button>
+</form>
+
+</body>
+</html>
