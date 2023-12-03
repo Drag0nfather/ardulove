@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Ardulove</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/projects">Наши проекты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/instructions">Инструкции</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Продукты</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-text ml-auto">
+            <span class="mr-2">Свяжитесь с нами: <a href="tel:+79637566677">+7(963)756-66-77</a></span>
+        </div>
+    </div>
+</nav>
+<script>
+    // Получаем текущий путь страницы
+    var currentPath = window.location.pathname;
+
+    // Находим ссылку, которая соответствует текущему пути
+    var activeLink = document.querySelector('.navbar-nav a[href="' + currentPath + '"]');
+
+    // Если такая ссылка найдена, добавляем класс 'active' к родительскому элементу 'li'
+    if (activeLink) {
+        activeLink.parentElement.classList.add('active');
+    }
+</script>
