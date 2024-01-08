@@ -11,7 +11,8 @@
 {% include 'nav.html' %}
 <h1>Create Project</h1>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
     {{ form.hidden_tag() }}
 
     <div>
@@ -26,16 +27,19 @@
 
     <div>
         {{ form.image.label }}
-        {{ form.image(class="form-control") }}
+        {{ form.image(class="form-control", type="file") }}
     </div>
 
     <div>
         {{ form.article.label }}
-        {{ form.article(class="form-control") }}
+        {{ form.article(class="form-control ckeditor") }}
+        {{ ckeditor.config(name='article') }}
+
     </div>
 
     <button type="submit">Create Project</button>
 </form>
+{% include 'footer.html' %}
 
 </body>
 </html>

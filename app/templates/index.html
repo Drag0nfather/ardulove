@@ -9,19 +9,27 @@
 <body>
 {% include 'nav.html' %}
 <div class="container mt-5">
-    <h1>Welcome to Ardulove!</h1>
-    <p class="lead">Your hub for Arduino projects, instructions, and more.</p>
-    <p>Explore the world of Arduino and unleash your creativity!</p>
+    <h1>Добро пожаловать на Ardulove!</h1>
+    <p class="lead">Arduino - это открытая платформа для создания электронных проектов. Мы любим и поддерживаем Arduino, и наш сайт посвящен всем аспектам этой удивительной технологии.</p>
+    <p>Исследуйте мир Arduino и раскройте свой творческий потенциал!</p>
 
     <!-- Adding navigation links -->
     <nav>
         <ul>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/instructions">Instructions</a></li>
-            <li><a href="/products">Products</a></li>
+            <li><a href="/projects">Наши проекты</a></li>
+            <li><a href="/instructions">Полезные инструкции</a></li>
+            <li><a href="/products">Продукты</a></li>
         </ul>
     </nav>
+        <div>
+            <h3>Популярные проекты</h3>
+            <ul>
+              <li><a href="#">Изготовление светодиодной мигалки</a></li>
+              <li><a href="#">Автоматизация дома с Arduino</a></li>
+              <li><a href="#">Изучение основ электроники</a></li>
+            </ul>
+          </div>
 </div>
-
+{% include 'footer.html' %}
 </body>
 </html>

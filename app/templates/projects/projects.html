@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Projects - Ardulove</title>
+    <title>Наши проекты - Ardulove</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 {% include 'nav.html' %}
 <div class="container mt-5">
-    <h2>My Projects</h2>
+    <h2>Наши проекты</h2>
     <div class="row">
         {% for project in projects %}
             <div class="col-md-6">
                 <div class="card my-3">
-                    <img src="{{ url_for('static', filename='images/' + project.image) }}" class="card-img-top" alt="{{ project.title }}">
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}" class="card-img-top" alt="{{ project.title }}" style="height: 450px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.title }}</h5>
                         <p class="card-text">{{ project.description }}</p>
@@ -25,6 +25,7 @@
         {% endfor %}
     </div>
 </div>
+{% include 'footer.html' %}
 
 </body>
 </html>
