@@ -27,7 +27,19 @@ migrate = Migrate(application, db)
 class Instruction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(100), nullable=False)
+    article = db.Column(db.Text, nullable=False)
+
+
+class InstructionForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    image = StringField('Image', validators=[DataRequired()])
+    article = CKEditorField('Article', validators=[DataRequired()])
+
+    class Meta:
+        csrf = True
 
 
 class Product(db.Model):
@@ -65,7 +77,7 @@ def index():
 @application.route('/instructions')
 def instructions():
     instructions = Instruction.query.all()
-    return render_template('instructions.html', instructions=instructions)
+    return render_template('instructions/instructions.html', instructions=instructions)
 
 @application.route('/products')
 def products():
@@ -83,6 +95,12 @@ def projects():
 def project_detail(project_id):
     project = Project.query.get_or_404(project_id)
     return render_template('projects/project_detail.html', project=project)
+
+
+@application.route('/instruction/<int:instruction_id>')
+def instruction_detail(instruction_id):
+    instruction = Instruction.query.get_or_404(instruction_id)
+    return render_template('instructions/instruction_detail.html', instruction=instruction)
 
 
 @application.route('/create_project', methods=['GET', 'POST'])
@@ -112,6 +130,35 @@ def create_project():
         return redirect(url_for('index'))
 
     return render_template('projects/create_project.html', form=form)
+
+
+@application.route('/create_instruction', methods=['GET', 'POST'])
+def create_instruction():
+    form = InstructionForm()
+
+    if form.validate_on_submit():
+        # Handle file upload
+        image = form.image.data
+        if image:
+            image_path = os.path.join(application.config['UPLOAD_FOLDER'], image.filename)
+            image.save(image_path)
+        else:
+            image_path = None
+
+        # Create a new Project instance and save it to the database
+        instruction = Instruction(
+            title=form.title.data,
+            description=form.description.data,
+            image=image.filename,
+            article=form.article.data
+        )
+
+        db.session.add(instruction)
+        db.session.commit()
+
+        return redirect(url_for('index'))
+
+    return render_template('instructions/create_instruction.html', form=form)
 
 
 @application.route('/files/<path:filename>')

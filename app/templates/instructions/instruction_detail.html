@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ instruction.title }} - Instruction Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            overflow-x: hidden; /* This prevents horizontal scrollbar */
+        }
+
+        .container {
+            max-width: 800px; /* Adjust the max-width value according to your layout */
+        }
+
+        img.img-fluid {
+            max-width: 100%; /* Ensures the image doesn't exceed its container */
+            height: auto; /* Maintains the aspect ratio of the image */
+        }
+
+        p {
+            max-width: 100%; /* Adjust the max-width value for paragraphs */
+            overflow-wrap: break-word; /* Word wrapping for long words */
+        }
+        p img {
+            max-width: 100%;
+            height: auto;
+          }
+          @media (max-width: 768px) {
+            p img {
+              max-height: 200px; /* Укажите нужную вам максимальную высоту для мобильных устройств */
+            }
+          }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div class="container mt-5">
+        <h2>{{ instruction.title }}</h2>
+        <img src="{{ url_for('static', filename='images/' + instruction.image) }}" class="img-fluid" alt="{{ instruction.title }}">
+        <p class="mt-3">{{ instruction.description }}</p>
+        <p> {{ instruction.article | safe }}</p>
+        <!-- Дополнительные поля или информация о проекте, которую вы хотите отобразить -->
+    </div>
+{% include 'footer.html' %}
+
+</body>
+</html>

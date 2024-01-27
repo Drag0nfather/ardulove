@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Instruction</title>
+    <!-- Подключаем стили CKEditor -->
+    {{ ckeditor.load() }}
+</head>
+<body>
+{% include 'nav.html' %}
+<h1>Create Instruction</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.title.label }}
+        {{ form.title(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.description.label }}
+        {{ form.description(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.image.label }}
+        {{ form.image(class="form-control", type="file") }}
+    </div>
+
+    <div>
+        {{ form.article.label }}
+        {{ form.article(class="form-control ckeditor") }}
+        {{ ckeditor.config(name='article') }}
+
+    </div>
+
+    <button type="submit">Create Instruction</button>
+</form>
+{% include 'footer.html' %}
+
+</body>
+</html>
