@@ -17,7 +17,7 @@ ckeditor = CKEditor(application)
 
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 application.config['SECRET_KEY'] = 'your_secret_key'
-application.config['UPLOAD_FOLDER'] = 'app/static/images'
+application.config['UPLOAD_FOLDER'] = 'static/images'
 application.config['CKEDITOR_FILE_UPLOADER'] = '/upload'
 application.config['CKEDITOR_ENABLE_CSRF'] = True
 
