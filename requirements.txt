@@ -1,4 +1,5 @@
 flask==3.0.0
+flask-admin==1.6.1
 Flask-Migrate
 flask-sqlalchemy==3.1.1
 flask-ckeditor==0.5.1

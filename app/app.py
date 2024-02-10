@@ -2,7 +2,9 @@ import os
 import random
 
 from flask import Flask, render_template, redirect, url_for, send_from_directory, request, flash
+from flask_admin.contrib.sqla import ModelView
 from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
+from flask_admin import Admin
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -22,6 +24,7 @@ application.config['CKEDITOR_ENABLE_CSRF'] = True
 csrf = CSRFProtect(application)
 db = SQLAlchemy(application)
 migrate = Migrate(application, db)
+admin = Admin(application, name='My Admin Panel', template_mode='bootstrap4')
 
 
 class Instruction(db.Model):
@@ -68,8 +71,10 @@ class ProjectForm(FlaskForm):
     class Meta:
         csrf = True
 
+admin.add_view(ModelView(Instruction, db.session))
+admin.add_view(ModelView(Project, db.session))
+admin.add_view(ModelView(Product, db.session))
 
-# Роуты для отображения страниц
 @application.route('/')
 def index():
     return render_template('index.html')
