@@ -92,7 +92,7 @@ def products():
 
 @application.route('/projects')
 def projects():
-    projects = Project.query.all()
+    projects = Project.query.order_by(-Project.id).all()
     return render_template('projects/projects.html', projects=projects)
 
 
